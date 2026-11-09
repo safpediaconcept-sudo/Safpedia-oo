@@ -3,14 +3,16 @@ import { getFirestore, collection, getDocs, query, where, orderBy } from 'https:
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js';
 
 // Re-use core initialized instance context securely
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAATExPAdi27kKvuvU0ujf6f2QqR8JWwTg",
-  authDomain: "tech-wizards-academy.firebaseapp.com",
-  projectId: "tech-wizards-academy",
-  storageBucket: "tech-wizards-academy.firebasestorage.app",
-  messagingSenderId: "155089680506",
-  appId: "1:155089680506:web:bd1909e4cc8e85b09663c3",
-  measurementId: "G-1JCG9GLV37"
+  apiKey: "AIzaSyCSmbDLlOOv7SSpU7SJgb1whwbWQoWxffM",
+  authDomain: "safpediaconcept-fc6f3.firebaseapp.com",
+  projectId: "safpediaconcept-fc6f3",
+  storageBucket: "safpediaconcept-fc6f3.firebasestorage.app",
+  messagingSenderId: "499308401998",
+  appId: "1:499308401998:web:7b0efec7cda39158c3fa1f",
+  measurementId: "G-DXEE1V8PVZ"
 };
 
 const app = initializeApp(firebaseConfig);

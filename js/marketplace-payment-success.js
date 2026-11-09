@@ -6,15 +6,17 @@ import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/
 
 // NOTE: mirrors course.js's inline Firebase init since this project's shared
 // firebase-config.js exports weren't available to confirm against.
-  const firebaseConfig = {
-    apiKey: "AIzaSyDxAQPzgKw6XjTg2f64vsvBcOo1u3eQGBU",
-    authDomain: "safpedia-concept.firebaseapp.com",
-    projectId: "safpedia-concept",
-    storageBucket: "safpedia-concept.firebasestorage.app",
-    messagingSenderId: "1052529581680",
-    appId: "1:1052529581680:web:a1fceadc99da90dc17deb5",
-    measurementId: "G-2MFWN6K7ZX"
-  };
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCSmbDLlOOv7SSpU7SJgb1whwbWQoWxffM",
+  authDomain: "safpediaconcept-fc6f3.firebaseapp.com",
+  projectId: "safpediaconcept-fc6f3",
+  storageBucket: "safpediaconcept-fc6f3.firebasestorage.app",
+  messagingSenderId: "499308401998",
+  appId: "1:499308401998:web:7b0efec7cda39158c3fa1f",
+  measurementId: "G-DXEE1V8PVZ"
+};
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
