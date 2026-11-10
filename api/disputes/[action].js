@@ -4,7 +4,7 @@ const { getFirebaseAdmin } = require('../../lib/firebase-admin');
 const { getAuthedUser } = require('../../lib/auth');
 const { sendEmail, sendNotification, getRecipient } = require('../utils/[action]');
 
-const APP_URL = process.env.APP_URL || 'https://safpedia-oo.vercel.app';
+const APP_URL = process.env.APP_URL || 'https://safpediaconcepts.com';
 
 // ====================================================================
 // SECURITY HELPER: HTML Entity Encoding for Input Sanitization

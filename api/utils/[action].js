@@ -3,7 +3,7 @@
 const { getFirebaseAdmin } = require('../../lib/firebase-admin');
 
 const EMAILJS_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send';
-const DEFAULT_ACTION_URL = process.env.APP_URL || 'https://safpedia-oo.vercel.app';
+const DEFAULT_ACTION_URL = process.env.APP_URL || 'https://safpediaconcepts.com';
 
 /**
  * Consolidated utils router — one Vercel serverless function serving

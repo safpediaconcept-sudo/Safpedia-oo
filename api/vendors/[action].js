@@ -43,7 +43,7 @@ async function computeHeldBalance(db, admin, vendorUid) {
 }
 
 
-const APP_URL = process.env.APP_URL || 'https://safpedia-oo.vercel.app';
+const APP_URL = process.env.APP_URL || 'https://safpediaconcept.com';
 
 /**
  * Consolidated vendors router — one Vercel serverless function serving
@@ -167,144 +167,8 @@ async function handleAddBankAccount(req, res, admin, db) {
   return res.status(200).json({ success: true, bankAccount });
 }
 
-/**
- * POST /api/vendors/request-payout
- * Any vendor with a bank account on file. Reserves the requested amount
- * (pendingPayout -> awaitingPayout) in a transaction first, then fires a
- * real Paystack Transfer on the MARKETPLACE account. If Paystack rejects
- * the transfer outright, the reservation is rolled back immediately.
- * Final settlement is confirmed asynchronously by the transfer.success /
- * transfer.failed / transfer.reversed webhook events.
- *
- * Body: { amount? }  // defaults to full pendingPayout balance if omitted
- */
 
 
-
-
-
-
-/*
-async function handleRequestPayout(req, res, admin, db) {
-  const user = await getAuthedUser(req, admin);
-  const { amount } = req.body || {};
-
-  const vendorRef = db.collection('vendors').doc(user.uid);
-  const vendorSnap = await vendorRef.get();
-
-  if (!vendorSnap.exists) {
-    return res.status(403).json({ error: 'You do not have a vendor account yet' });
-  }
-
-  const vendorData = vendorSnap.data();
-
-  if (vendorData.isSuspended) {
-    return res.status(403).json({ error: 'This vendor account is suspended and cannot request payouts' });
-  }
-
-  if (!vendorData.bankAccount || !vendorData.bankAccount.recipientCode) {
-    return res.status(400).json({ error: 'Add a bank account before requesting a payout' });
-  }
-
-  const pendingPayout = vendorData.pendingPayout || 0;
-  const { heldAmount, nextAvailableAt } = await computeHeldBalance(db, admin, user.uid);
-  const availableNow = Math.max(0, pendingPayout - heldAmount);
-
-  const requestAmount = typeof amount === 'number' && amount > 0 ? amount : availableNow;
-
-  if (requestAmount <= 0) {
-    if (heldAmount > 0) {
-      return res.status(400).json({
-        error: `No payout available yet — ₦${heldAmount.toLocaleString('en-NG')} from recent sales is held for ${HOLD_PERIOD_DAYS} days after purchase to match our return policy.${nextAvailableAt ? ` It becomes available on ${nextAvailableAt.toDate().toLocaleDateString('en-NG')}.` : ''}`,
-        reasonCode: 'held_pending_return_window',
-        heldAmount,
-        nextAvailableAt
-      });
-    }
-    return res.status(400).json({ error: 'No payout balance available' });
-  }
-  if (requestAmount > availableNow) {
-    return res.status(400).json({
-      error: `Requested amount exceeds your available balance of ₦${availableNow.toLocaleString('en-NG')}. ₦${heldAmount.toLocaleString('en-NG')} from recent sales is still held until ${HOLD_PERIOD_DAYS} days after purchase${nextAvailableAt ? ` (earliest release: ${nextAvailableAt.toDate().toLocaleDateString('en-NG')})` : ''}.`,
-      reasonCode: 'exceeds_available_balance',
-      availableNow,
-      heldAmount,
-      nextAvailableAt
-    });
-  }
-
-  const payoutRef = vendorRef.collection('vendorPayoutRequests').doc();
-
-  await db.runTransaction(async (tx) => {
-    tx.set(payoutRef, {
-      amount: requestAmount,
-      status: 'processing',
-      reference: payoutRef.id,
-      vendorUid: user.uid,
-      createdAt: admin.firestore.Timestamp.now()
-    });
-    tx.set(vendorRef, {
-      pendingPayout: admin.firestore.FieldValue.increment(-requestAmount),
-      awaitingPayout: admin.firestore.FieldValue.increment(requestAmount),
-      updatedAt: admin.firestore.Timestamp.now()
-    }, { merge: true });
-  });
-
-  const PAYSTACK_SECRET = process.env.PAYSTACK_SECRET_KEY_MARKETPLACE;
-  if (!PAYSTACK_SECRET) {
-    await rollbackPayout(db, admin, vendorRef, payoutRef, requestAmount, 'PAYSTACK_SECRET_KEY_MARKETPLACE not configured');
-    return res.status(500).json({ error: 'Payout provider not configured' });
-  }
-
-  let transferJson;
-  try {
-    const transferRes = await fetch('https://api.paystack.co/transfer', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${PAYSTACK_SECRET}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        source: 'balance',
-        amount: Math.round(requestAmount * 100),
-        recipient: vendorData.bankAccount.recipientCode,
-        reason: 'Vendor product sale payout',
-        reference: payoutRef.id
-      })
-    });
-    transferJson = await transferRes.json();
-  } catch (networkErr) {
-    await rollbackPayout(db, admin, vendorRef, payoutRef, requestAmount, networkErr.message);
-    return res.status(502).json({ error: 'Could not reach Paystack transfer API: ' + networkErr.message });
-  }
-
-  if (!transferJson.status) {
-    await rollbackPayout(db, admin, vendorRef, payoutRef, requestAmount, transferJson.message || 'Transfer rejected');
-    return res.status(502).json({ error: transferJson.message || 'Paystack transfer failed', details: transferJson });
-  }
-
-  await payoutRef.set({
-    transferCode: transferJson.data.transfer_code,
-    paystackStatus: transferJson.data.status,
-    updatedAt: admin.firestore.Timestamp.now()
-  }, { merge: true });
-
-  await notifyPayoutRequested({
-    admin,
-    db,
-    vendorUid: user.uid,
-    amount: requestAmount,
-    reference: payoutRef.id
-  });
-
-  return res.status(200).json({
-    success: true,
-    payoutId: payoutRef.id,
-    amount: requestAmount,
-    status: transferJson.data.status
-  });
-}
-*/
 
 
 

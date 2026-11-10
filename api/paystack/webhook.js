@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const { getFirebaseAdmin } = require('../../lib/firebase-admin');
 const { sendEmail, sendNotification, getRecipient } = require('../utils/[action]');
 
-const APP_URL = process.env.APP_URL || 'https://safpedia-oo.vercel.app';
+const APP_URL = process.env.APP_URL || 'https://safpediaconcepts.com';
 
 // Paystack signature verification needs the RAW request body.
 // Disabling Vercel's default JSON body parsing so we can read the exact bytes.

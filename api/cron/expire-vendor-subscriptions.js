@@ -2,7 +2,7 @@ const { getFirebaseAdmin } = require('../../lib/firebase-admin');
 const { sendEmail, sendNotification, getRecipient } = require('../utils/[action]');
 
 const BATCH_LIMIT = 400;
-const APP_URL = process.env.APP_URL || 'https://safpedia-oo.vercel.app';
+const APP_URL = process.env.APP_URL || 'https://safpediaconcepts.com';
 
 function isAuthorizedCronRequest(req) {
   const secret = process.env.CRON_SECRET;

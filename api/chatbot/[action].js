@@ -10,7 +10,7 @@ const { getChatCompletion } = require('../../lib/chatbot/groqClient');
 
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_HISTORY_TURNS = 10;
-const APP_URL = process.env.APP_URL || 'https://safpedia-oo.vercel.app';
+const APP_URL = process.env.APP_URL || 'https://safpediaconcepts.com';
 const ADMIN_NOTIFICATION_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL;
 
 /**
