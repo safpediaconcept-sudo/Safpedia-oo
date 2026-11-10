@@ -3,9 +3,9 @@ import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.
 
 // Configuration constants - Replace with your actual EmailJS IDs
 
-const EMAILJS_SERVICE_ID = 'service_121xb34';
-const EMAILJS_TEMPLATE_ID = 'template_und2q98';
-const EMAILJS_PUBLIC_KEY = '1CglFCDiNLYkK41a-';
+const EMAILJS_SERVICE_ID = 'service_fy98yvf';
+const EMAILJS_TEMPLATE_ID = 'template_il7lxl9';
+const EMAILJS_PUBLIC_KEY = 'dNMsZPnqKzpg1qxSK';
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -23,7 +23,7 @@ async function dispatchDynamicEmail(payload) {
             subject: payload.subject,
             headline: payload.headline,
             body_content: payload.bodyContent,
-            action_url: payload.actionUrl || 'https://safpedia-oo.vercel.app',
+            action_url: payload.actionUrl || 'https://safpediaconcepts.com',
             action_text: payload.actionText || 'View Dashboard'
         });
         console.log('Email dispatched successfully:', response.status, response.text);
