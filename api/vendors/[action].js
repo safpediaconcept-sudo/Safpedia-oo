@@ -43,7 +43,7 @@ async function computeHeldBalance(db, admin, vendorUid) {
 }
 
 
-const APP_URL = process.env.APP_URL || 'https://safpediaconcept.com';
+const APP_URL = process.env.APP_URL || 'https://safpediaconcepts.com';
 
 /**
  * Consolidated vendors router — one Vercel serverless function serving
