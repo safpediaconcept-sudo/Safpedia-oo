@@ -71,7 +71,7 @@ module.exports = async (req, res) => {
       return res.status(500).json({ error: 'PAYSTACK_SECRET_KEY not configured' });
     }
 
-    const origin = req.headers.origin || process.env.SITE_URL || 'https://techwizardsacademy.com';
+    const origin = req.headers.origin || process.env.SITE_URL || 'https://safpediaconcepts.com';
     const callbackUrl = `${origin}/payment-success.html`;
 
     const initRes = await fetch('https://api.paystack.co/transaction/initialize', {
